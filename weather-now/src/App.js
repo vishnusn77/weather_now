@@ -3,6 +3,7 @@ import SearchBar from './components/SearchBar';
 import CurrentWeather from './components/CurrentWeather';
 import Forecast from './components/Forecast';
 import ErrorAlert from './components/ErrorAlert'; // Import the ErrorAlert component
+import Footer from "./components/Footer"; // Import Footer component
 import { fetchCurrentWeather, fetchForecast } from './services/weatherService';
 
 const App = () => {
@@ -19,9 +20,9 @@ const App = () => {
             setForecast(forecastData);
         } catch (err) {
             if (err.response && err.response.status === 404) {
-                setError('City not found. Please try another search.');
+                setError('⚠️ City not found. Please try another search.');
             } else {
-                setError('Something went wrong. Please try again later.');
+                setError('⚠️ Something went wrong. Please try again later.');
             }
             setCurrentWeather(null); // Clear current weather if an error occurs
             setForecast(null); // Clear forecast if an error occurs
@@ -54,6 +55,7 @@ const App = () => {
                     <Forecast data={forecast} />
                 </div>
             </div>
+            <Footer /> {/* Add Footer Component */}
         </div>
     );
 };

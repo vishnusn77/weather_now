@@ -52,3 +52,19 @@ body {
     border-radius: 5px;
     text-align: center;
 }
+
+.container {
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push footer to the bottom if content is short */
+}
+
+footer {
+    background-color: #2a2a2a;
+    color: #b3b3b3;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    width: 100%;
+}
