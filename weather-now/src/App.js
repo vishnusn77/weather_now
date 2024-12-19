@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SearchBar from './components/SearchBar';
+import CurrentWeather from './components/CurrentWeather';
+import Forecast from './components/Forecast';
+import { fetchCurrentWeather, fetchForecast } from './services/weatherService';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [currentWeather, setCurrentWeather] = useState(null);
+    const [forecast, setForecast] = useState(null);
+
+    const handleSearch = async (city) => {
+        const weatherData = await fetchCurrentWeather(city);
+        const forecastData = await fetchForecast(city);
+        setCurrentWeather(weatherData);
+        setForecast(forecastData);
+    };
+
+    return (
+        <div className="container py-4">
+            <h1 className="text-center mb-4">WeatherNow</h1>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <SearchBar onSearch={handleSearch} />
+                </div>
+            </div>
+            <div className="row justify-content-center mt-4">
+                <div className="col-md-6">
+                    <CurrentWeather data={currentWeather} />
+                </div>
+            </div>
+            <div className="row justify-content-center mt-4">
+                <div className="col-md-8">
+                    <Forecast data={forecast} />
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default App;
