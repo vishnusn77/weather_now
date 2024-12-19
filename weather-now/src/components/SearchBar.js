@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const SearchBar = ({ onSearch }) => {
-    const [city, setCity] = useState('');
+    const [city, setCity] = useState("");
+
+    const handleInputChange = (event) => {
+        setCity(event.target.value);
+    };
 
     const handleSearch = () => {
-        onSearch(city);
-        setCity('');
+        if (city.trim() !== "") {
+            onSearch(city);
+        }
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            handleSearch();
+        }
     };
 
     return (
@@ -13,9 +24,10 @@ const SearchBar = ({ onSearch }) => {
             <input
                 type="text"
                 className="form-control"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
                 placeholder="Enter city name"
+                value={city}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress} // Add keypress event listener
             />
             <button className="btn btn-primary" onClick={handleSearch}>
                 Search

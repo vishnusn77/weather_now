@@ -11,9 +11,12 @@ const ErrorAlert = ({ message }) => {
                 margin: "10px 0",
                 borderRadius: "5px",
                 textAlign: "center",
+                height: "50px"
             }}
         >
-            <p>{message}</p>
+            <p style={{
+                color: "#721c24",
+            }}>{message}</p>
         </div>
     );
 };
